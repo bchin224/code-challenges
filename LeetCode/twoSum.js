@@ -22,3 +22,13 @@ twoSum(nums,target)
 //         }
 //     }
 // };
+
+// subtracting a value from target, then check if the difference exists in nums
+// var twoSum = function(nums, target) {
+//     for (let i = 0; i <= nums.length; i++) {
+//         let check = target - nums[i]
+//         if (nums.includes(check) && i != nums.indexOf(check)) {
+//             return [nums.indexOf(check), i]
+//         }
+//     }
+// };
