@@ -7,7 +7,6 @@ class LinkedList {
     }
 
     // Create linked list methods
-
     // add to end of list (the tail)
     append(value) {
         // if list is empty
@@ -19,7 +18,6 @@ class LinkedList {
             oldTail.next = this.tail
             this.tail.previous = oldTail
         }
-
     }
 
     // add to the beginning of list (the head)
@@ -33,7 +31,6 @@ class LinkedList {
             oldHead.prev = this.head
             this.head.next = oldHead
         }
-
     }
 
     // delete the head
@@ -69,7 +66,6 @@ class LinkedList {
             }
             return removedTail.value
         }
-
     }
 
     // search the linked list (traverse)
@@ -87,8 +83,7 @@ class LinkedList {
     
 }
 
-
-
+// create node class
 class Node {
     constructor(value, prev, next) {
         this.value = value
@@ -102,5 +97,11 @@ let list = new LinkedList()
 list.append(1)
 list.append(2)
 list.append(3)
+list.append(4)
+list.append(5)
+list.append(6)
 
-console.log(list)
+list.search(7)
+list.search(5)
+
+console.log(list.search(5))
