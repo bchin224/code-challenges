@@ -1,98 +1,6 @@
-// class Node {
-//     constructor(val, next, prev) {
-//         this.val = val || null
-//         this.next = next || null
-//         this.prev = prev || null
-//     }
-// }
-
-// class MyLinkedList {
-//     // implement the linked list
-//     constructor() {
-//         this.head = new Node()
-//         this.tail = new Node()
-//         this.size = 0
-//         this.head.next = this.tail
-//         this.tail.prev = this.head
-//     }
-    
-//     get(index) {
-//         if (index < 0 || index >= index.size) {
-//             return -1
-//         }
-        
-//         let currNode = this.head.next
-//         // decrement the index until it's zero (falsy)
-//         while (index--) {
-//             currNode = currNode.next
-//         }
-//         return currNode.val
-//     }
-    
-//     addAtHead(val) {
-//         // prev is just the head
-//         let prev = this.head
-//         // next will give 1st value
-//         let next = this.head.next
-//         // create new node that's pointing to the
-//         // correct next nodes already
-//         let node = new Node(val, prev, next)
-//         // have pointers point at new node
-//         prev.next = node
-//         next.prev = node
-//         this.size++
-//     }
-    
-//     addAtTail(val) {
-//         let prev = this.tail.prev
-//         let next = this.tail
-        
-//         let node = new Node(val, prev, next)
-//         prev.next = node
-//         next.prev = node
-//         this.size++
-//     }
-    
-//     addAtIndex(index, val) {
-//         if (index < 0 || index > this.size) return null
-//         if (index === this.length) {
-//             this.addAtTail(val)
-//             return
-//         }
-//         let prev = this.head
-        
-//         while(index--) {
-//             prev = prev.next
-//         }
-        
-//         let next = prev.next
-        
-//         let node = new Node(val, next, prev)
-//         prev.next = node
-//         next.prev = node
-//         this.size++
-//     }
-    
-//     deleteAtIndex(index) {
-//         if (index < 0 || index >= this.size) return null
-        
-//         let prev = this.head
-//         while(index--) {
-//             prev = prev.next
-//         }
-//         let next = prev.next.next
-        
-//         prev.next = next
-//         next.prev = prev
-        
-//         this.length--
-//     }    
-// }
-
-
+const assert = require('assert')
 
 /**
- * Function version
  * Initialize your data structure here.
  */
  var MyLinkedList = function() {
@@ -127,7 +35,6 @@ MyLinkedList.prototype.addAtHead = function(val) {
     // if empty
     if (!this.head) {
         this.head = newNode
-        this.next = newNode
     } else {
         // if not empty, set new node's next to old head
         newNode.next = this.head
@@ -206,3 +113,32 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
     }
     
 };
+// testing
+// case 1
+let myList = new MyLinkedList()
+
+assert(myList.get(0) === -1)
+myList.addAtHead(5)
+assert(myList.get(0) === 5)
+assert(myList.get(1) === -1)
+
+// // case 2
+// myList = new MyLinkedList()
+// assert(myList.get(0) === -1)
+// myList.addAtTail(2)
+// assert(myList.get(0) === 2)
+
+// // case 3
+// myList = new MyLinkedList()
+// assert(myList.addAtIndex(1,9) === 9)
+
+
+/*
+* Your MyLinkedList object will be instantiated and called as such:
+* var obj = new MyLinkedList()
+* var param_1 = obj.get(index)
+* obj.addAtHead(val)
+* obj.addAtTail(val)
+* obj.addAtIndex(index,val)
+* obj.deleteAtIndex(index)
+*/
