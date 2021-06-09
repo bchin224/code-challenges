@@ -19,20 +19,16 @@ var Node = function(val) {
  */
 MyLinkedList.prototype.get = function(index) {
     if (index > this.size - 1 || index < 0) {
-        // console.log('Is empty')
         return -1
     }
     // this.head should always point to a node, not to a specific value
     let currentNode = this.head
-    // console.log('This is currentNode.next.val: ', currentNode.next.val) 
-    // console.log('This is currentNode, ', currentNode.val)
     for (let i = 0; i < index; i++) {
         // currentNode.next is just a pointer to the next node
         // still need to use .next.val to target the next value
         currentNode = currentNode.next
-        // console.log(`At ${i} the currentNode.val is now ${currentNode.val}`)
     }
-    console.log(`At ${index}, the node was: ${currentNode.val}`)
+    // console.log(`At ${index}, the node was: ${currentNode.val}`)
     return currentNode.val
 };
 
@@ -41,7 +37,6 @@ MyLinkedList.prototype.get = function(index) {
  */
 MyLinkedList.prototype.addAtHead = function(val) {
     const newNode = new Node(val)
-    // console.log('This is newNode.val, ', newNode.val)
     // if empty
     if (!this.head) {
         // make sure to assign tail as well
@@ -51,11 +46,8 @@ MyLinkedList.prototype.addAtHead = function(val) {
         newNode.next = this.head
         // make new node the head
         this.head = newNode
-        // this.head = newNode.val
-
     }
     this.size++
-    // console.log(myList)
     return this
     
 };
@@ -72,15 +64,15 @@ MyLinkedList.prototype.addAtTail = function(val) {
     } else {
         this.tail.next = newNode
         this.tail = newNode
-        // console.log('This is this.tail after, ', this.tail)
     }
     this.size++
-    // console.log(myList)
     return this
 };
 
 /**
- * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. 
+ * Add a node of value val before the index-th node in the linked list.
+ * If index equals to the length of linked list, the node will be appended
+ * to the end of linked list. If index is greater than the length, the node will not be inserted. 
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
     const newNode = new Node(val)
@@ -140,17 +132,13 @@ myList.addAtHead(8)
 // assert(myList.get(1) === 5)
 // assert(myList.get(-1) === -1)
 myList.addAtHead(14)
-// assert(myList.get(0) === 14)
-// assert(myList.get(1) === 8)
-// assert(myList.get(2) === 5)
-myList.addAtTail(80)
-assert(myList.get(3) === 80)
+myList.addAtHead(100000)
+myList.addAtHead(4)
 
 // // case 2
 // myList = new MyLinkedList()
-// assert(myList.get(0) === -1)
-// myList.addAtTail(2)
-// assert(myList.get(0) === 2)
+myList.addAtTail(80)
+assert(myList.get(5) === 80)
 
 // // case 3
 // myList = new MyLinkedList()
