@@ -29,6 +29,7 @@ MyLinkedList.prototype.get = function(index) {
         currentNode = currentNode.next
     }
     // console.log(`At ${index}, the node was: ${currentNode.val}`)
+    // ---------------------------- figure out logic if currentNode.val is null
     return currentNode.val
 };
 
@@ -91,7 +92,6 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     newNode.next = prevNode.next ? prevNode.next : null
     prevNode.next = newNode
     this.size++
-    console.log('add index: ', this)
     return this
 };
 
@@ -104,46 +104,55 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
     } if (index === 0) {
         this.head = this.head.next
         this.size--
-        return this
+        return
+        // return this
     } else {
         let currentNode = this.head
-        for (let i = 0; i < index - 1; i++) {
-            currentNode = currentNode.next
-        }
-        currentNode.next = currentNode.next.next ? currentNode.next : null
-        if (!currentNode.next) {
-            this.tail = currentNode
+        for (let i = 0; i < index; i++) {
+            if (!currentNode.next || !currentNode.next.next) {
+                this.tail = currentNode
+                currentNode.next = null
+            } else {
+                currentNode.next = currentNode.next.next
+                currentNode = currentNode.next
+            }
         }
         this.size--
-        // console.log(currentNode.val)
-        return currentNode.val
-    }
-    
+        return
+        // return currentNode.val
+    } 
 };
 // testing
 // case 1
-let myList = new MyLinkedList()
+// let myList = new MyLinkedList()
 
-assert(myList.get(0) === -1)
-myList.addAtHead(5)
-// assert(myList.get(0) === 5)
-myList.addAtHead(8)
-// assert(myList.get(0) === 8)
-// assert(myList.get(1) === 5)
-// assert(myList.get(-1) === -1)
-myList.addAtHead(14)
-myList.addAtHead(100000)
-myList.addAtHead(4)
+// assert(myList.get(0) === -1)
+// myList.addAtHead(5)
+// // assert(myList.get(0) === 5)
+// myList.addAtHead(8)
+// // assert(myList.get(0) === 8)
+// // assert(myList.get(1) === 5)
+// // assert(myList.get(-1) === -1)
+// myList.addAtHead(14)
+// myList.addAtHead(100000)
+// myList.addAtHead(4)
 
 // // case 2
 // myList = new MyLinkedList()
-myList.addAtTail(80)
-assert(myList.get(5) === 80)
+// myList.addAtTail(80)
+// assert(myList.get(5) === 80)
 
-// // case 3
-// myList = new MyLinkedList()
-// assert(myList.addAtIndex(1,9) === 9)
+// case 3
+myList = new MyLinkedList()
+myList.addAtIndex(0,5)
+assert(myList.get(0) === 5)
+myList.addAtIndex(1,9)
+assert(myList.get(1) === 9)
+myList.addAtIndex(2,77)
 
+// case 4
+myList.deleteAtIndex(2)
+assert(myList.get(1) === 77)
 
 /*
 * Your MyLinkedList object will be instantiated and called as such:
