@@ -18,7 +18,7 @@ var Node = function(val) {
  * Get the value of the index-th node in the linked list. If the index is invalid, return -1. 
  */
 MyLinkedList.prototype.get = function(index) {
-    if (index > this.size - 1 || index < 0) {
+    if (this.size === 0 || index > this.size - 1 || index < 0) {
         return -1
     }
     // this.head should always point to a node, not to a specific value
@@ -29,7 +29,6 @@ MyLinkedList.prototype.get = function(index) {
         currentNode = currentNode.next
     }
     // console.log(`At ${index}, the node was: ${currentNode.val}`)
-    // ---------------------------- figure out logic if currentNode.val is null
     return currentNode.val
 };
 
@@ -41,7 +40,8 @@ MyLinkedList.prototype.addAtHead = function(val) {
     // if empty
     if (!this.head) {
         // make sure to assign tail as well
-        this.head = this.tail = newNode
+        this.head = newNode
+        this.tail = newNode
     } else {
         // if not empty, set new node's next to old head
         newNode.next = this.head
@@ -50,18 +50,17 @@ MyLinkedList.prototype.addAtHead = function(val) {
     }
     this.size++
     return this
-    
 };
 
 /**
  * Append a node of value val to the last element of the linked list. 
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-    // make new node
     const newNode = new Node(val)
     // if empty create the node and assign head and tail
     if (!this.tail) {
-        this.head = this.tail = newNode
+        this.head = newNode
+        this.tail = newNode
     } else {
         this.tail.next = newNode
         this.tail = newNode
@@ -79,18 +78,22 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     const newNode = new Node(val)
     if (index > this.size) {
         return
-    } else if (index <= 0) {
+    }
+    if (index <= 0) {
         return this.addAtHead(val)
-    } else if (index === this.size) {
+    }
+    if (index === this.size) {
         return this.addAtTail(val)
     }
     
-    let prevNode = this.head
+    let currentNode = this.head
     for (let i = 0; i < index - 1; i++) {
-        prevNode = prevNode.next
+        currentNode = currentNode.next
     }
-    newNode.next = prevNode.next ? prevNode.next : null
-    prevNode.next = newNode
+    // if currentNode.next is true and not null, set newnode.next to it
+    // else if currentNode.next is false, set it to null
+    newNode.next = currentNode.next ? currentNode.next : null
+    currentNode.next = newNode
     this.size++
     return this
 };
@@ -101,26 +104,22 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
 MyLinkedList.prototype.deleteAtIndex = function(index) {
     if (index >= this.size || index < 0) {
         return
-    } if (index === 0) {
+    }
+    if (index === 0) {
         this.head = this.head.next
         this.size--
         return
-        // return this
-    } else {
-        let currentNode = this.head
-        for (let i = 0; i < index; i++) {
-            if (!currentNode.next || !currentNode.next.next) {
-                this.tail = currentNode
-                currentNode.next = null
-            } else {
-                currentNode.next = currentNode.next.next
-                currentNode = currentNode.next
-            }
-        }
-        this.size--
-        return
-        // return currentNode.val
     } 
+    let currentNode = this.head
+    for (let i = 0; i < index - 1; i++) {
+        currentNode = currentNode.next
+    }
+    currentNode.next = currentNode.next.next ? currentNode.next.next : null
+    if (!currentNode.next) {
+        this.tail = currentNode
+    }
+    this.size--
+    return
 };
 // testing
 // case 1
@@ -128,7 +127,7 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
 
 // assert(myList.get(0) === -1)
 // myList.addAtHead(5)
-// // assert(myList.get(0) === 5)
+// assert(myList.get(0) === 5)
 // myList.addAtHead(8)
 // // assert(myList.get(0) === 8)
 // // assert(myList.get(1) === 5)
@@ -143,16 +142,16 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
 // assert(myList.get(5) === 80)
 
 // case 3
-myList = new MyLinkedList()
-myList.addAtIndex(0,5)
-assert(myList.get(0) === 5)
-myList.addAtIndex(1,9)
-assert(myList.get(1) === 9)
-myList.addAtIndex(2,77)
+// myList = new MyLinkedList()
+// myList.addAtIndex(0,5)
+// assert(myList.get(0) === 5)
+// myList.addAtIndex(1,9)
+// assert(myList.get(1) === 9)
+// myList.addAtIndex(2,77)
 
-// case 4
-myList.deleteAtIndex(2)
-assert(myList.get(1) === 77)
+// // case 4
+// myList.deleteAtIndex(2)
+// assert(myList.get(1) === 77)
 
 /*
 * Your MyLinkedList object will be instantiated and called as such:
@@ -163,3 +162,30 @@ assert(myList.get(1) === 77)
 * obj.addAtIndex(index,val)
 * obj.deleteAtIndex(index)
 */
+
+// failing test case
+myList = new MyLinkedList()
+myList.addAtHead(7)
+assert(myList.get(0) === 7)
+myList.addAtHead(2)
+assert(myList.get(0) === 2)
+myList.addAtHead(1)
+assert(myList.get(0) === 1)
+myList.addAtIndex(3,0)
+assert(myList.get(2) === 7)
+myList.deleteAtIndex(2)
+assert(myList.get(0) === 1)
+assert(myList.get(1) === 2)
+assert(myList.get(2) === 0)
+myList.addAtHead(6)
+assert(myList.get(0) === 6)
+myList.addAtTail(4)
+assert(myList.get(4) === 4)
+myList.get(4)
+myList.addAtHead(4)
+assert(myList.get(0) === 4)
+myList.addAtIndex(5,0)
+assert(myList.get(5) === 0)
+myList.addAtHead(6)
+assert(myList.get(0) === 6)
+
