@@ -51,3 +51,51 @@ var romanToInt = function(s) {
 };
 
 romanToInt(s)
+
+// var romanToInt = function(s) {
+//     let result = 0
+//     let split = s.split('')
+    
+//     for (let i = 0; i < split.length; i++) {
+//         if (split[i] === 'I') {
+//             if (split[i+1] === 'V') {
+//                 result += 4
+//                 i++
+//             } else if (split[i+1] === 'X') {
+//                 result += 9
+//                 i++
+//             } else {
+//                 result++
+//             }
+//         } else if (split[i] === 'V') {
+//             result += 5
+//         } else if (split[i] === 'X') {
+//             if (split[i+1] === 'L') {
+//                 result += 40
+//                 i++
+//             } else if (split[i+1] === 'C') {
+//                 result += 90
+//                 i++
+//             } else {
+//                 result += 10
+//             }
+//         } else if (split[i] === 'L') {
+//             result += 50
+//         } else if (split[i] === 'C') {
+//             if (split[i+1] === 'D') {
+//                 result += 400
+//                 i++
+//             } else if (split[i+1] === 'M') {
+//                 result += 900
+//                 i++
+//             } else {
+//                 result += 100
+//             }
+//         } else if (split[i] === 'D') {
+//             result += 500
+//         } else if (split[i] === 'M') {
+//             result += 1000
+//         }
+//     }
+//     console.log(result)
+// };

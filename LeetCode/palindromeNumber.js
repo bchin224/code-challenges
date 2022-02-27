@@ -17,3 +17,24 @@ var isPalindrome = function(x) {
 };
 
 isPalindrome(x)
+
+// var isPalindrome = function(x) {
+//     let xArray = x.toString().split('')
+//     let left = 0
+//     let right = xArray.length - 1
+
+//     if (xArray.length === 1) {
+//         console.log(true)
+//         return true
+//     }
+//     while (left <= right) {
+//         if (xArray[left] === xArray[right]) {
+//             left++
+//             right--
+//         } else {
+//             console.log(false)
+//             return
+//         }
+//     }
+//     return true
+// };
