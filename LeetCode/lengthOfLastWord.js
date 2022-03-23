@@ -10,3 +10,8 @@ var lengthOfLastWord = function(s) {
 };
 
 lengthOfLastWord(s)
+
+// // TC O(log n), SC O(1)
+// var lengthOfLastWord = function(s) {
+//     console.log(s.trim().split(' ').pop().length)
+// };
