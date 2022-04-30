@@ -19,6 +19,26 @@ var isPalindrome = function(x) {
 isPalindrome(x)
 
 // var isPalindrome = function(x) {
+//     let arrayX = x.toString().split('')
+//     let left = 0
+//     let right = arrayX.length - 1
+
+//     while (left < right) {
+//         if (arrayX[left] != arrayX[right]) {
+//             console.log(false)
+//             return false
+//         } else {
+//             left++
+//             right--
+//         }
+//     }
+    
+//     console.log('true')
+//     return true
+// };
+
+
+// var isPalindrome = function(x) {
 //     let xArray = x.toString().split('')
 //     let left = 0
 //     let right = xArray.length - 1
