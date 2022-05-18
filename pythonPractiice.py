@@ -1,19 +1,3 @@
-array = [2,6,7,3,[2,5,3],3,1,7]
-
-def productSum(array):
-    result = 0
-    for num in array:
-        if isinstance(num,int):
-            print(num)
-            result += num
-        elif isinstance(num,list):
-            print(num)
-            
-    
-    print(result)
-
-productSum(array)
-			
         
 ######## find the last line ########
 
