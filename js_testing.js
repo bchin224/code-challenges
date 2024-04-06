@@ -1,1 +1,5 @@
-console.log('Hello')
+const colors = ['red','blue','purple']
+
+
+
+test(word)
